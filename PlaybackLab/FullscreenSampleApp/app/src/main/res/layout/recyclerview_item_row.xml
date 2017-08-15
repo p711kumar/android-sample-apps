@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@android:color/black">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="@android:color/white"
         android:text="This is a long description to test this out, wara wara" />
 
     <!--OoyalaSkinLayout has to be placed into a container for a correct transformation between
@@ -24,8 +26,16 @@
         <com.ooyala.android.skin.OoyalaSkinLayout
             android:id="@+id/ooyalaSkinLayout"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#000" />
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="start|top"
+            android:text="THIS IS A BIG TEXT"/>
 
     </FrameLayout>
 

@@ -24,7 +24,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Player
 
     private Application app;
     private List<String> embedCodes;
-    private RecyclerViewFullScreenManager recyclerFullScreenHelper;
+    public RecyclerViewFullScreenManager recyclerFullScreenHelper;
 
     public RecyclerAdapter(List<String> embedCodes, FrameLayout expandedLayout, Application app) {
         this.embedCodes= embedCodes;

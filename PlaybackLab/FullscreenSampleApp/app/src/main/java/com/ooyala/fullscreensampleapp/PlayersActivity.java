@@ -3,6 +3,7 @@ package com.ooyala.fullscreensampleapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import java.util.ArrayList;
@@ -10,14 +11,17 @@ import java.util.List;
 
 public class PlayersActivity extends AppCompatActivity {
 
+    FrameLayout expandedLayout ;
+    RecyclerView recyclerView;
+
     private RecyclerAdapter recyclerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
 
-        FrameLayout expandedLayout = (FrameLayout) findViewById(R.id.empty_view);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        expandedLayout = (FrameLayout) findViewById(R.id.empty_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         List<String> embedCodes = new ArrayList<>();
         embedCodes.add("JiOTdrdzqAujYa5qvnOxszbrTEuU5HMt");
@@ -29,5 +33,14 @@ public class PlayersActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setHasFixedSize(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (expandedLayout.getVisibility() == View.VISIBLE){
+            recyclerAdapter.recyclerFullScreenHelper.collapsePlayerLayout();
+        } else {
+			super.onBackPressed();
+		}
     }
 }
