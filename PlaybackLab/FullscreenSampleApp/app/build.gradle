@@ -19,13 +19,13 @@ android {
     }
 }
 
-/*task copyAssetsTask(type: Copy) {
+task copyAssetsTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/index.android.jsbundle')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config/skin.json')
     into new File(projectDir, './src/main/assets')
     println "Assets updated."
 }
-tasks.copyAssetsTask.execute()*/
+tasks.copyAssetsTask.execute()
 
 task copySkinConfigTask(type: Copy) {
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/skin-config')
@@ -42,8 +42,8 @@ task copyFontsAssetsTask(type: Copy) {
 tasks.copyFontsAssetsTask.execute()
 
 task copyTask(type: Copy) {
-    //from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
-    //from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSDK-Android/OoyalaSDK.jar')
+    from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/OoyalaSkinSDK.jar')
     from new File(vendorDir, 'Ooyala/OoyalaSkinSDK-Android/react-native-0.35.0.aar')
     into new File(projectDir,'./libs')
     println "Jars updated."
@@ -51,10 +51,9 @@ task copyTask(type: Copy) {
 tasks.copyTask.execute()
 
 dependencies {
-    //compile files('libs/OoyalaSDK.jar')
-    //compile files('libs/OoyalaSkinSDK.jar')
+    compile files('libs/OoyalaSDK.jar')
+    compile files('libs/OoyalaSkinSDK.jar')
     compile(name:'react-native', version:'0.35.0', ext:'aar')
-    compile project(':skin')
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

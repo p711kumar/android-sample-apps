@@ -19,6 +19,7 @@
     <!--OoyalaSkinLayout has to be placed into a container for a correct transformation between
     a full screen mode to a window mode-->
     <FrameLayout
+        android:id="@+id/skinParentContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="3">

@@ -1,46 +1,32 @@
 package com.ooyala.fullscreensampleapp;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.FrameLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlayersActivity extends AppCompatActivity {
 
-    FrameLayout expandedLayout ;
-    RecyclerView recyclerView;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main_activity);
 
-    private RecyclerAdapter recyclerAdapter;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_players);
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		Fragment fragmentByTag = fragmentManager.findFragmentByTag(RecyclerFragment.TAG);
+		if (fragmentByTag == null){
+			RecyclerFragment recyclerFragment = new RecyclerFragment();
+			fragmentManager.beginTransaction().replace(R.id.container, recyclerFragment, RecyclerFragment.TAG).commit();
+		}
+	}
 
-        expandedLayout = (FrameLayout) findViewById(R.id.empty_view);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
-        List<String> embedCodes = new ArrayList<>();
-        embedCodes.add("JiOTdrdzqAujYa5qvnOxszbrTEuU5HMt");
-        embedCodes.add("h4aHB1ZDqV7hbmLEv4xSOx3FdUUuephx");
-        embedCodes.add("42cnNsMjE62UDH0JlCssXEPhxlhj1YBN");
-        embedCodes.add("E5NWlqMzE6nxrKShm0gR4DzpM49Wl0l9");
-        embedCodes.add("JiOTdrdzqAujYa5qvnOxszbrTEuU5HMt");
-        recyclerAdapter = new RecyclerAdapter(embedCodes, expandedLayout, getApplication());
-
-        recyclerView.setAdapter(recyclerAdapter);
-        recyclerView.setHasFixedSize(true);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (expandedLayout.getVisibility() == View.VISIBLE){
-            recyclerAdapter.recyclerFullScreenHelper.collapsePlayerLayout();
-        } else {
+	@Override
+	public void onBackPressed() {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (fragmentManager.getBackStackEntryCount() > 0){
+			fragmentManager.popBackStack();
+		} else {
 			super.onBackPressed();
 		}
-    }
+	}
 }
